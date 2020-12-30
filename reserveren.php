@@ -15,12 +15,12 @@
 <header>
     <div class="navbar">
         <p class="logo" >Laura's Happy Home</p>
-    <nav>
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="reserveren.php">Reserveren</a></li>
-        </ul>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="reserveren.php">Reserveren</a></li>
+            </ul>
+        </nav>
     </div>
 </header>
 <div class="content">
