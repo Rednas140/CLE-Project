@@ -1,17 +1,35 @@
-body {
-    margin: 0;
-    background: white;
-    font-family: sans-serif;
-    font-weight: 300;
+html, body{
+height: 100%;
+overflow: hidden;
 }
 
+body {
+    margin: 0;
+    background: #efefef;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
 .navbar {
     width: 80%;
+    padding-bottom: 0;
     margin: 0 auto;
+}
+
+.content {
+    background-color: white;
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.content p {
+    margin: 0;
 }
 
 header {
     background: #557A95;
+    padding-bottom: 0;
+
 }
 
 header::after {
@@ -22,9 +40,10 @@ header::after {
 
 .logo {
     float: left;
-    padding: 20px;
+    padding: 15px;
     margin: 0;
     color: #ffffff;
+    font-size: 25px;
 }
 nav {
     float: right;
@@ -39,7 +58,7 @@ nav ul {
 nav li {
     display: inline-block;
     margin-left: 70px;
-    padding-top: 25px;
+    padding-top: 20px;
     position: relative;
 }
 
@@ -57,7 +76,7 @@ nav a::before {
     content:'';
     display: block;
     height: 5px;
-    width: 0%;
+    width: 0;
     background-color: #d7e8f5;
     position: absolute;
     top: 0;
