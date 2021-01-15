@@ -1,3 +1,7 @@
+<?php
+
+require_once "database.php";
+?>
 <!DOCTYPE html>
 
 <html>
@@ -28,11 +32,13 @@
     <div class="mySlides fade">
         <div class="numbertext">1 / 2</div>
         <img src="style/picture1.jpg" style="width:100%">
+        <p class="imgtext">Caravan 1</p>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">2 / 2</div>
         <img src="style/picture2.jpg" style="width:100%">
+        <p class="imgtext">Caravan 2</p>
     </div>
 </div>
 <br>

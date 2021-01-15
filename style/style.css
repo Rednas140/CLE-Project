@@ -125,6 +125,9 @@ nav a:hover::before{
     background-color: #717171;
 }
 
+.imgtext {
+    text-align: center;
+}
 /* Fading animation */
 .fade {
     -webkit-animation-name: fade;
@@ -173,12 +176,11 @@ input {
     border: 1px solid #aaaaaa;
 }
 
-/* Mark input boxes that gets an error on validation: */
 input.invalid {
     background-color: #ffdddd;
 }
 
-/* Hide all steps by default: */
+
 .tab {
     display: none;
 }
@@ -202,7 +204,7 @@ button:hover {
     background-color: #bbbbbb;
 }
 
-/* Make circles that indicate the steps of the form: */
+
 .step {
     height: 15px;
     width: 15px;
@@ -218,7 +220,15 @@ button:hover {
     opacity: 1;
 }
 
-/* Mark the steps that are finished and valid: */
 .step.finish {
     background-color: #557A95;
+}
+
+#adminlogin {
+    background-color: #ffffff;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
 }
