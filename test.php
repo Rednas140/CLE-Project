@@ -28,6 +28,19 @@ require_once "includes/database.php";
     </div>
 </header>
 <div class="content">
+    <form id="test" action="test.php" method="post">
+        <input placeholder="Naam" name="naam"><br><br>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+
+    <?php
+    if(isset($_POST['submit'])) {
+        $sql = "INSERT INTO reservatie (naam)
+        VALUES ('" . $_POST["naam"] . "')";
+        $result = mysqli_query($db,$sql);
+    }
+    ?>
+    <p>in dit gedeelte komt alle content die de pagina heeft.</p>
 </div>
 
 </body>

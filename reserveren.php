@@ -1,10 +1,10 @@
 <?php
 
-require_once "database.php";
+require_once "includes/database.php";
 ?>
 <!DOCTYPE html>
 
-<html>
+<html lang="nl">
 
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -28,10 +28,20 @@ require_once "database.php";
     </div>
 </header>
 <div class="content">
-    <form id="reserverenform" action="reserveren.php">
+    <form id="reserverenform" action="reserveren.php" method="post"
+          onsubmit="
+          <?php
+          $naam = $_POST['naam'];
+          $straat = $_POST['straat'];
+          $plaats = $_POST['plaats'];
+          $email = $_POST['email'];
+          $telefoon = $_POST['telefoon'];
+          $reserbegin= $_POST['reserbegin'];
+          $resereind= $_POST['resereind'];
+          $opmerking= $_POST['opmerking']; ?>">
         <h1 class="formtitel">Reserveer:</h1>
         <div class="tab">Contactgegevens
-            <p><input placeholder="Naam" oninput="this.className = ''" name="Naam"></p>
+            <p><input placeholder="Naam" oninput="this.className = ''" name="naam"></p>
             <p><input placeholder="Straatnaam + huisnummer" oninput="this.className = ''" name="straat"></p>
             <p><input placeholder="Plaatsnaam" oninput="this.className = ''" name="plaats"></p>
             <p><input placeholder="E-mail" oninput="this.className = ''" name="email" type="email"></p>
@@ -55,10 +65,15 @@ require_once "database.php";
             <span class="step"></span>
             <span class="step"></span>
             <span class="step"></span>
-            <span class="step"></span>
         </div>
     </form>
-
+    <p>
+        <?php
+        echo "$naam $straat $plaats $email $telefoon $reserbegin $resereind $opmerking";
+        $sql = "INSERT INTO reservatie (naam, straat, plaats, email, telefoon, reserbegin, resereind, opmerking) VALUES ('{$naam}', '{$straat}', '{$plaats}', '{$email}', '{$telefoon}', '{$reserbegin}', '{$resereind}', '{$opmerking}')";
+        $result = mysqli_query($db,$sql);
+        ?>
+    </p>
 </div>
 <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)

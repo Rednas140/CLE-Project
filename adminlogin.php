@@ -1,6 +1,6 @@
 <?php
 
-require_once "database.php";
+require_once "includes/database.php";
 ?>
 <!DOCTYPE html>
 
@@ -28,13 +28,19 @@ require_once "database.php";
     </div>
 </header>
 <div class="content">
-<form id="adminlogin" action="/adminlogin.php">
+<form id="adminlogin" action="includes/login.inc.php" method="POST">
     <h1 class="formtitel">Login:</h1>
     <div class="adminlogin">
-        <p><input placeholder="Gebruikersnaam"  name="admingebruikers"></p>
-        <p><input placeholder="Wachtwoord" name="adminwachtwoord" type="password"></p>
+        <p><input type="text" placeholder="Gebruikersnaam"  name="admingebruikers"></p>
+        <p><input type="text" placeholder="Wachtwoord" name="adminwachtwoord" type="password"></p>
+        <p><button type="submit" name="submitadmin">Log in!</button></p>
     </div>
 </form>
+    <?php
+    $adminnaam = $_POST["admingebruikers"];
+    $adminww = $_POST["adminwachtwoord"];
+    echo "$adminnaam $adminww";
+    ?>
 </div>
 
 </body>
