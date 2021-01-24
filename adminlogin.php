@@ -1,6 +1,6 @@
 <?php
-
 require_once "includes/database.php";
+session_start();
 ?>
 <!DOCTYPE html>
 
@@ -28,18 +28,26 @@ require_once "includes/database.php";
     </div>
 </header>
 <div class="content">
-<form id="adminlogin" action="includes/login.inc.php" method="POST">
+<form id="reserverenformv2" action="includes/login.inc.php" method="POST">
     <h1 class="formtitel">Login:</h1>
     <div class="adminlogin">
-        <p><input type="text" placeholder="Gebruikersnaam"  name="admingebruikers"></p>
-        <p><input type="text" placeholder="Wachtwoord" name="adminwachtwoord" type="password"></p>
-        <p><button type="submit" name="submitadmin">Log in!</button></p>
+        <input type="text" placeholder="Gebruikersnaam"  name="username">
+        <input type="password" placeholder="Wachtwoord" name="password">
+        <button id="loginbutton" type="submit" name="submitadmin">Log in!</button>
     </div>
 </form>
     <?php
-    $adminnaam = $_POST["admingebruikers"];
-    $adminww = $_POST["adminwachtwoord"];
-    echo "$adminnaam $adminww";
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == "") {
+            echo "<p>Gelieve alle velden in te vullen!</p>";
+        }
+        else if ($_GET["error"] == "stmtfailed") {
+            echo "<p>Er is iets misgegaan , probeer opnieuw!</p>";
+        }
+        else if ($_GET["error"] == "wronglogin") {
+            echo "<p>Foute invoergegevens</p>";
+        }
+    }
     ?>
 </div>
 
