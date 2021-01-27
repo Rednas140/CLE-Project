@@ -1,6 +1,6 @@
 <?php
-
 require_once "includes/database.php";
+session_start();
 ?>
 <!DOCTYPE html>
 
@@ -15,7 +15,7 @@ require_once "includes/database.php";
 
 </head>
 
-<body>
+<body class="bodyindex">
 <header>
     <div class="navbar">
         <p class="logo" >Laura's Happy Home</p>
@@ -23,11 +23,17 @@ require_once "includes/database.php";
         <ul>
             <li><a href="index.php">Home</a></li>
             <li><a href="reserveren.php">Reserveren</a></li>
+            <?php
+            if (isset($_SESSION["id"])){
+                echo "<li><a href='adminpage.php'>Admin</a></li>";
+                echo "<li><a href='includes/logout.inc.php'>Uitloggen</a></li>";
+            }
+            ?>
         </ul>
     </nav>
     </div>
 </header>
-<div class="content">
+<div class="contentindex">
 <div class="slideshow-container">
     <div class="mySlides fade">
         <div class="numbertext">1 / 2</div>
@@ -48,30 +54,20 @@ require_once "includes/database.php";
     <span class="dot" onclick="currentSlide(1)"></span>
     <span class="dot" onclick="currentSlide(2)"></span>
 </div>
-    <p>in dit gedeelte komt alle content die de pagina heeft.</p>
+    <p>Wij zijn familie Verhoeven en beschikken over een aangepaste stacaravan op RCN-camping "de Flaasbloem" in Chaam(NB).<br>
+        De stacaravan is volledig aangepast en wij willen deze caravan graag aan met met of zonder beperking verhuren. <br>
+        Om binnen te komen is er een oprijplaat en in de caravan zelf is er een tillift tot uw beschikking.
+        Ook de badkamer aangepast en kunt u gebruik maken van een badstoel en steunen naast een verhoogd toilet. <br>
+        Er zijn 2 slaapkamers: Eén slaapkamer heeft een stapelbed en een kledingkast.
+        De andere slaapkamer heeft een volledig verstelbaar hoog-laagbed en een tweepersoonsbed. <br>
+        De caravan heeft een ruime woonkamer waarin u met een rolstoel gemakkelijk kunt manoeuvreren.
+        In de woonkamer staat een tv en een dvd-speler die u kunt gebruiken. <br>
+        De keuken is van alle gemakken voorzien: o.a. magnetron, Senseo koffiezetapparaat en oventje zijn aanwezig.
+        In de betegelde tuin staat een schommelstoel waarin u heerlijk kunt genieten van de natuur waarin de caravan staat.<br>
+    </p>
 </div>
 
-<script>
-    var slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
-        setTimeout(showSlides, 3000); // Change image every 2 seconds
-    }
-</script>
+<script src="js/indeximage.js"></script>
 
 </body>
 

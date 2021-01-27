@@ -1,6 +1,9 @@
 <?php
 require_once "includes/database.php";
 session_start();
+if (isset($_SESSION["id"])){
+    header("location: adminpage.php");
+}
 ?>
 <!DOCTYPE html>
 

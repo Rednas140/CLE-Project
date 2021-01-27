@@ -1,11 +1,9 @@
 <?php
-
 require_once "includes/database.php";
+session_start();
 ?>
 <!DOCTYPE html>
-
-<html lang="nl">
-
+<html>
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -23,133 +21,63 @@ require_once "includes/database.php";
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="reserveren.php">Reserveren</a></li>
+                <?php
+                if (isset($_SESSION["id"])){
+                    echo "<li><a href='adminpage.php'>Admin</a></li>";
+                    echo "<li><a href='includes/logout.inc.php'>Uitloggen</a></li>";
+
+                }
+                ?>
             </ul>
         </nav>
     </div>
 </header>
 <div class="content">
-    <form id="reserverenform" action="reserveren.php" method="post"
-          onsubmit="
-          <?php
-          $naam = $_POST['naam'];
-          $straat = $_POST['straat'];
-          $plaats = $_POST['plaats'];
-          $email = $_POST['email'];
-          $telefoon = $_POST['telefoon'];
-          $reserbegin= $_POST['reserbegin'];
-          $resereind= $_POST['resereind'];
-          $opmerking= $_POST['opmerking']; ?>">
-        <h1 class="formtitel">Reserveer:</h1>
-        <div class="tab">Contactgegevens
-            <p><input placeholder="Naam" oninput="this.className = ''" name="naam"></p>
-            <p><input placeholder="Straatnaam + huisnummer" oninput="this.className = ''" name="straat"></p>
-            <p><input placeholder="Plaatsnaam" oninput="this.className = ''" name="plaats"></p>
-            <p><input placeholder="E-mail" oninput="this.className = ''" name="email" type="email"></p>
-            <p><input placeholder="Telefoon" oninput="this.className = ''" name="telefoon"></p>
-        </div>
-        <div class="tab">Reserveren van:
-            <p><input type="date" id="start" oninput="this.className = ''" name="reserbegin" value="2020-01-11" min="2020-01-01" max="2020-12-31"></p>
-            <p><input type="date" id="start" oninput="this.className = ''" name="resereind" value="2020-01-11" min="2020-01-01" max="2020-12-31"></p>
-        </div>
-        <div class="tab">Opmerkingen:
-            <p><input placeholder="Als u nog opmerkingen heeft kan u die hier noteren" oninput="this.className = ''" name="opmerking"></p>
-        </div>
-        <div style="overflow:auto;">
-            <div style="float:right;">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Terug</button>
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">Volgende</button>
-            </div>
-        </div>
-        <!-- Circles which indicates the steps of the form: -->
-        <div style="text-align:center;margin-top:40px;">
-            <span class="step"></span>
-            <span class="step"></span>
-            <span class="step"></span>
-        </div>
+    <form id="reserverenformv2" action="includes/reserveren.inc.php" method="post">
+        <!-- fieldsets -->
+        <fieldset>
+            <h2 class="fs-title">Reserveer:</h2>
+            <h3 class="fs-subtitle">De contactgegevens</h3>
+            <input type="text" name="naam" placeholder="Naam" />
+            <input type="text" name="straat" placeholder="Straat en huisnummer" />
+            <input type="text" name="plaats" placeholder="Plaats" />
+            <input type="text" name="email" placeholder="Email">
+            <input type="text" name="telefoon" placeholder="Telefoonnummer" />
+            <input type="button" name="next" class="next action-button" value="Volgende" />
+        </fieldset>
+        <fieldset>
+            <h2 class="fs-title">Reserveer:</h2>
+            <h3 class="fs-subtitle">Selecteer de data vanaf wanneer en tot wanneer u wilt reserveren</h3>
+            <input type="date" name="reserbegin" value="2021-03-01" min="2021-03-01" max="2021-11-01">
+            <input type="date" name="resereind" value="2021-03-01" min="2021-03-01" max="2021-11-01">
+            <input type="button" name="previous" class="previous action-button" value="Vorige" />
+            <input type="button" name="next" class="next action-button" value="Volgende" />
+        </fieldset>
+        <fieldset>
+            <h2 class="fs-title">Reserveer:</h2>
+            <h3 class="fs-subtitle">Heeft u nog verdere opmerkingen of vragen</h3>
+            <input placeholder="Als u nog opmerkingen heeft kan u die hier noteren" name="opmerking">
+            <input type="button" name="previous" class="previous action-button" value="Vorige" />
+            <input onclick="return confirm('Heeft u alle informatie juist ingevuld en wilt u de reservering doorgeven?');" type="submit" name="submitreserveren" class="submit action-button" value="Verstuur"/>
+        </fieldset>
+        <script src="js/reserveren.js"></script>
     </form>
-    <p>
-        <?php
-        echo "$naam $straat $plaats $email $telefoon $reserbegin $resereind $opmerking";
-        $sql = "INSERT INTO reservatie (naam, straat, plaats, email, telefoon, reserbegin, resereind, opmerking) VALUES ('{$naam}', '{$straat}', '{$plaats}', '{$email}', '{$telefoon}', '{$reserbegin}', '{$resereind}', '{$opmerking}')";
-        $result = mysqli_query($db,$sql);
-        ?>
-    </p>
+    <?php
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == "emptyinput") {
+            echo "<p class='errortext'>Gelieve alle velden in te vullen!</p>";
+        }
+        else if ($_GET["error"] == "stmtfailed") {
+            echo "<p class='errortext'>Er is iets misgegaan , probeer opnieuw!</p>";
+        }
+        else if ($_GET["error"] == "none") {
+            echo "<p class='errortext'>U reservering is geslaagd, er zal binnen een paar dagen contact worden opgenomen door de eigenaars!</p>";
+        }
+    }
+    ?>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script><script  src="js/reserveren.js"></script>
 </div>
-<script>
-    var currentTab = 0; // Current tab is set to be the first tab (0)
-    showTab(currentTab); // Display the current tab
-
-    function showTab(n) {
-        // This function will display the specified tab of the form...
-        var x = document.getElementsByClassName("tab");
-        x[n].style.display = "block";
-        //... and fix the Previous/Next buttons:
-        if (n == 0) {
-            document.getElementById("prevBtn").style.display = "none";
-        } else {
-            document.getElementById("prevBtn").style.display = "inline";
-        }
-        if (n == (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = "Verstuur";
-        } else {
-            document.getElementById("nextBtn").innerHTML = "Volgende";
-        }
-        //... and run a function that will display the correct step indicator:
-        fixStepIndicator(n)
-    }
-
-    function nextPrev(n) {
-        // This function will figure out which tab to display
-        var x = document.getElementsByClassName("tab");
-        // Exit the function if any field in the current tab is invalid:
-        if (n == 1 && !validateForm()) return false;
-        // Hide the current tab:
-        x[currentTab].style.display = "none";
-        // Increase or decrease the current tab by 1:
-        currentTab = currentTab + n;
-        // if you have reached the end of the form...
-        if (currentTab >= x.length) {
-            // ... the form gets submitted:
-            document.getElementById("reserverenform").submit();
-            return false;
-        }
-        // Otherwise, display the correct tab:
-        showTab(currentTab);
-    }
-
-    function validateForm() {
-        // This function deals with validation of the form fields
-        var x, y, i, valid = true;
-        x = document.getElementsByClassName("tab");
-        y = x[currentTab].getElementsByTagName("input");
-        // A loop that checks every input field in the current tab:
-        for (i = 0; i < y.length; i++) {
-            // If a field is empty...
-            if (y[i].value == "") {
-                // add an "invalid" class to the field:
-                y[i].className += " invalid";
-                // and set the current valid status to false
-                valid = false;
-            }
-        }
-        // If the valid status is true, mark the step as finished and valid:
-        if (valid) {
-            document.getElementsByClassName("step")[currentTab].className += " finish";
-        }
-        return valid; // return the valid status
-    }
-
-    function fixStepIndicator(n) {
-        // This function removes the "active" class of all steps...
-        var i, x = document.getElementsByClassName("step");
-        for (i = 0; i < x.length; i++) {
-            x[i].className = x[i].className.replace(" active", "");
-        }
-        //... and adds the "active" class on the current step:
-        x[n].className += " active";
-    }
-</script>
-
 </body>
 
 </html>

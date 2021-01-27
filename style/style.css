@@ -135,6 +135,31 @@ nav a:hover::before{
     animation-name: fade;
     animation-duration: 2s;
 }
+.adminpagebody{
+    background-color: white;
+}
+
+.adminpage table{
+    display: table;
+    width: 99%;
+    border-collapse: collapse;
+    margin: 10px auto 0;
+}
+
+.adminpage th{
+    text-align: left;
+    border: 1px solid #333;
+
+}
+
+.adminpage td{
+    border: 1px solid #333;
+    max-width: 12.5%;
+}
+
+.admintext {
+    margin: 10px 5% 0;
+}
 
 @-webkit-keyframes fade {
     from {opacity: .4}
@@ -150,85 +175,105 @@ nav a:hover::before{
     box-sizing: border-box;
 }
 
-body {
-    background-color: #f1f1f1;
-}
-
-#reserverenform {
-    background-color: #ffffff;
-    margin: 0 auto;
-    font-family: 'Montserrat', sans-serif;
-    padding: 40px;
+/*form styles*/
+#reserverenformv2 {
     width: 70%;
-    min-width: 300px;
-}
-
-.formtitel {
+    margin: 0 auto;
     text-align: center;
+    position: relative;
+    padding-top: 20px;
 }
-
-input {
-    padding: 10px;
-    margin-top: 10px;
+#reserverenformv2 fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 3px;
+    padding: 20px 30px;
+    box-sizing: border-box;
     width: 100%;
-    font-size: 17px;
-    font-family: 'Montserrat', sans-serif;
-    border: 1px solid #aaaaaa;
+    margin: 0 auto;
+    /*stacking fieldsets above each other*/
+    position: relative;
 }
-
-input.invalid {
-    background-color: #ffdddd;
-}
-
-
-.tab {
+/*Hide all except first fieldset*/
+#reserverenformv2 fieldset:not(:first-of-type) {
     display: none;
 }
-
-button {
-    background-color: #557A95;
-    color: #ffffff;
-    border: none;
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 17px;
+/*inputs*/
+#reserverenformv2 input, #reserverenformv2 textarea {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 10px 0 0;
+    width: 100%;
+    box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+    color: #2C3E50;
+}
+/*buttons*/
+#reserverenformv2 .action-button {
+    background: #557A95;
+    width: auto;
+    color: white;
+    border: 0 none;
+    border-radius: 2px;
     cursor: pointer;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+#reserverenformv2 .action-button:hover, #reserverenformv2 .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #557A95;
+}
+/*headings*/
+.fs-title {
+    font-size: 32px;
+    text-transform: uppercase;
+    color: #2C3E50;
+    margin-bottom: 10px;
+}
+.fs-subbtitle {
+    font-weight: normal;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
 }
 
-button:hover {
-    opacity: 0.8;
+#loginbutton {
+    background: #557A95;
+    width: auto;
+    color: white;
+    border: 0 none;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin-top: 10px;
 }
-
-#prevBtn {
-    background-color: #bbbbbb;
+.bodyindex{
+    overflow: auto;
+    height: 100%;
 }
-
-
-.step {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
-    border: none;
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.5;
-}
-
-.step.active {
-    opacity: 1;
-}
-
-.step.finish {
-    background-color: #557A95;
-}
-
-#adminlogin {
-    background-color: #ffffff;
+.contentindex{
+    background-color: white;
+    width: 50%;
+    height: 112%;
     margin: 0 auto;
-    font-family: 'Montserrat', sans-serif;
-    padding: 40px;
-    width: 70%;
-    min-width: 300px;
+}
+.errortext{
+    text-align: center;
+    margin: 2%;
+}
+.contentindex p {
+    padding: 1em;
+}
+.goedbutton{
+    background: #557A95;
+    width: auto;
+    color: white;
+    border: 0 none;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 3px 15px;
+    margin-left: 10px;
+    box-sizing: border-box;
 }
